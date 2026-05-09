@@ -1,0 +1,499 @@
+
+  <header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">Y</div>
+    <div>
+      <div class="brand-name">YaDar | يادار</div>
+      <div class="brand-sub">Saudi stays guide</div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <div class="tab active">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 11L12 4l9 7v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-8z"/>
+      </svg>
+      <span>Homes<br><small>إقامات</small></span>
+    </div>
+
+    <div class="tab">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3c3 0 5 2.4 5 5.3 0 4.2-5 9.7-5 9.7s-5-5.5-5-9.7C7 5.4 9 3 12 3z"/>
+        <circle cx="12" cy="8.3" r="1.7"/>
+      </svg>
+      <span>Experiences<br><small>تجارب</small></span>
+    </div>
+
+    <div class="tab">
+      <svg viewBox="0 0 24 24">
+        <path d="M5 7h14v12H5z"/>
+        <path d="M8 7V5h8v2"/>
+      </svg>
+      <span>Services<br><small>خدمات</small></span>
+    </div>
+  </nav>
+
+  <div class="actions">
+
+  <button class="login-btn">
+    Login
+  </button>
+
+  <button class="suggest-btn">
+  Suggest a stay
+</button>
+    <button class="dark-toggle" onclick="toggleDarkMode()">
+  🌙
+</button>
+
+  <button class="circle-btn">☰</button>
+
+</div>
+</header>
+
+<section class="hero">
+  <h1>Discover stays across Saudi Arabia</h1>
+  <p>اكتشفي شقق، شاليهات، فلل، واستراحات مختارة بطريقة سهلة ومريحة.</p>
+
+  <div class="searchbar">
+    <div>
+      <b>Search</b>
+      <input id="searchInput" type="text" placeholder="City, name, type..." oninput="filterCards()">
+    </div>
+
+    <div>
+      <b>City</b>
+      <select id="cityFilter" onchange="filterCards()">
+        <option value="all">All cities</option>
+        <option value="riyadh">Riyadh</option>
+        <option value="abha">Abha</option>
+      </select>
+    </div>
+
+    <div>
+      <b>Type</b>
+      <select id="typeFilter" onchange="filterCards()">
+        <option value="all">All types</option>
+        <option value="apartment">Apartment</option>
+        <option value="chalet">Chalet</option>
+        <option value="villa">Villa</option>
+        <option value="rest house">Rest house</option>
+        <option value="cabin">Cabin</option>
+        <option value="studio">Studio</option>
+      </select>
+    </div>
+
+    <div>
+      <b>Max price</b>
+      <select id="priceFilter" onchange="filterCards()">
+        <option value="all">Any price</option>
+        <option value="600">Up to SR 600</option>
+        <option value="1000">Up to SR 1,000</option>
+        <option value="1500">Up to SR 1,500</option>
+        <option value="2500">Up to SR 2,500</option>
+      </select>
+    </div>
+
+    <button onclick="filterCards()">Search</button>
+  </div>
+
+    <button class="reset-btn" onclick="resetFilters()">Reset filters | مسح البحث</button>
+
+</section>
+
+<section class="about-section">
+
+  <h2>About YaDar | عن يادار</h2>
+
+  <p>
+    YaDar is a Saudi stays discovery guide helping users explore apartments, chalets, villas, and rest houses across Saudi Arabia.
+  </p>
+
+  <p>
+    يادار منصة استكشافية تساعد المستخدمين على تصفح الإقامات المختارة في السعودية بطريقة سهلة وواضحة.
+  </p>
+
+</section>
+
+<div class="skeleton-area" id="skeletonArea">
+  <div class="skeleton-card"></div>
+  <div class="skeleton-card"></div>
+  <div class="skeleton-card"></div>
+  <div class="skeleton-card"></div>
+</div>
+
+<section class="section" id="favoritesSection" style="display:none;">
+  <div class="section-head">
+    <h2>My favorites | مفضلتي</h2>
+  </div>
+
+ <div class="favorites-empty" id="favoritesEmpty">
+  ❤️ No favorites yet
+</div> 
+  
+  <div class="cards" id="favoritesCards"></div>
+</section>
+
+<section class="section" id="riyadhSection">
+  <div class="section-head">
+    <h2>Popular homes in Riyadh</h2>
+    <div class="arrows">
+      <button onclick="scrollCards('riyadhCards', -1)">‹</button>
+      <button onclick="scrollCards('riyadhCards', 1)">›</button>
+    </div>
+  </div>
+
+  <div class="cards" id="riyadhCards">
+
+    <div class="card" data-city="riyadh" data-type="apartment" data-price="669" data-name="Apartment in Riyadh" onclick="openDetails('Apartment in Riyadh','SR 669 for 2 nights','★ 5.0','https://images.unsplash.com/photo-1502672260266-1c1ef2d93688')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688">
+        <span class="badge">Guest favorite</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Apartment in Riyadh</h3>
+      <p>SR 669 for 2 nights · ★ 5.0</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="apartment" data-price="845" data-name="Modern apartment" onclick="openDetails('Modern apartment','SR 845 for 2 nights','★ 4.96','https://images.unsplash.com/photo-1522708323590-d24dbb6b0267')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267">
+        <span class="badge">New</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Modern apartment</h3>
+      <p>SR 845 for 2 nights · ★ 4.96</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="chalet" data-price="1250" data-name="Private chalet" onclick="openDetails('Private chalet','SR 1,250 for 2 nights','★ 4.95','https://images.unsplash.com/photo-1600607687920-4e2a09cf159d')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d">
+        <span class="badge">Family stay</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Private chalet</h3>
+      <p>SR 1,250 for 2 nights · ★ 4.95</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="rest house" data-price="540" data-name="Family rest house" onclick="openDetails('Family rest house','SR 540 for 2 nights','★ 4.7','https://images.unsplash.com/photo-1564013799919-ab600027ffc6')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+        <span class="badge">Calm area</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Family rest house</h3>
+      <p>SR 540 for 2 nights · ★ 4.7</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="villa" data-price="2200" data-name="Luxury penthouse" onclick="openDetails('Luxury penthouse','SR 2,200 for 2 nights','★ 5.0','https://images.unsplash.com/photo-1494526585095-c41746248156')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156">
+        <span class="badge">Luxury</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Luxury penthouse</h3>
+      <p>SR 2,200 for 2 nights · ★ 5.0</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="studio" data-price="420" data-name="Studio apartment" onclick="openDetails('Studio apartment','SR 420 for 2 nights','★ 4.5','https://images.unsplash.com/photo-1484154218962-a197022b5858')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858">
+        <span class="badge">Budget</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Studio apartment</h3>
+      <p>SR 420 for 2 nights · ★ 4.5</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="villa" data-price="1800" data-name="Modern villa" onclick="openDetails('Modern villa','SR 1,800 for 2 nights','★ 4.9','https://images.unsplash.com/photo-1512917774080-9991f1c4c750')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750">
+        <span class="badge">Pool</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Modern villa</h3>
+      <p>SR 1,800 for 2 nights · ★ 4.9</p>
+    </div>
+
+    <div class="card" data-city="riyadh" data-type="apartment" data-price="610" data-name="Cozy apartment" onclick="openDetails('Cozy apartment','SR 610 for 2 nights','★ 4.8','https://images.unsplash.com/photo-1505693416388-ac5ce068fe85')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+        <span class="badge">Cozy</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Cozy apartment</h3>
+      <p>SR 610 for 2 nights · ★ 4.8</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section soft" id="abhaSection">
+  <div class="section-head">
+    <h2>Stay in Abha</h2>
+    <div class="arrows">
+      <button onclick="scrollCards('abhaCards', -1)">‹</button>
+      <button onclick="scrollCards('abhaCards', 1)">›</button>
+    </div>
+  </div>
+
+  <div class="cards" id="abhaCards">
+
+    <div class="card" data-city="abha" data-type="cabin" data-price="720" data-name="Cabin in Abha" onclick="openDetails('Cabin in Abha','SR 720 for 2 nights','★ 4.88','https://images.unsplash.com/photo-1518780664697-55e3ad937233')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233">
+        <span class="badge">Mountain view</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Cabin in Abha</h3>
+      <p>SR 720 for 2 nights · ★ 4.88</p>
+    </div>
+
+    <div class="card" data-city="abha" data-type="villa" data-price="1100" data-name="Villa in Abha" onclick="openDetails('Villa in Abha','SR 1,100 for 2 nights','★ 4.92','https://images.unsplash.com/photo-1613490493576-7fde63acd811')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811">
+        <span class="badge">Premium</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Villa in Abha</h3>
+      <p>SR 1,100 for 2 nights · ★ 4.92</p>
+    </div>
+
+    <div class="card" data-city="abha" data-type="apartment" data-price="510" data-name="Abha apartment" onclick="openDetails('Abha apartment','SR 510 for 2 nights','★ 4.7','https://images.unsplash.com/photo-1505693416388-ac5ce068fe85')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+        <span class="badge">Cozy</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Abha apartment</h3>
+      <p>SR 510 for 2 nights · ★ 4.7</p>
+    </div>
+
+    <div class="card" data-city="abha" data-type="villa" data-price="1450" data-name="Mountain villa" onclick="openDetails('Mountain villa','SR 1,450 for 2 nights','★ 4.9','https://images.unsplash.com/photo-1512917774080-9991f1c4c750')">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750">
+        <span class="badge">Premium</span>
+        <button class="heart" onclick="toggleHeart(event,this)">♡</button>
+      </div>
+      <h3>Mountain villa</h3>
+      <p>SR 1,450 for 2 nights · ★ 4.9</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="no-results" id="noResults">
+  لا توجد نتائج مطابقة للبحث الحالي.
+  <br>
+  No matching stays found.
+</div>
+
+<div class="modal" id="detailsModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeDetails()">×</button>
+
+    <img id="modalImg">
+
+    <div class="modal-content">
+
+      <div class="modal-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalPrice"></p>
+        <p id="modalRating"></p>
+
+        <p class="desc">
+          مكان مقترح ضمن دليل يادار. يمكن لاحقًا ربطه برابط خارجي لمنصة مرخصة أو صفحة تفاصيل مستقلة.
+        </p>
+
+        <a href="#" class="details-link">
+          رابط المصدر / Source link
+        </a>
+
+        <p class="legal">
+          YaDar | يادار is currently a discovery guide only. No bookings or payments are completed through the website at this stage.
+        </p>
+      </div>
+
+      <div class="booking-card">
+        <h3>Booking request</h3>
+        <p class="booking-note">No payment now</p>
+
+        <div class="booking-row">
+          <label>Guests</label>
+          <select id="guestSelect">
+            <option value="1">1 guest</option>
+            <option value="2">2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
+            <option value="5">5+ guests</option>
+          </select>
+        </div>
+
+        <div class="booking-row">
+          <label>Nights</label>
+          <select id="nightSelect">
+            <option value="1">1 night</option>
+            <option value="2" selected>2 nights</option>
+            <option value="3">3 nights</option>
+            <option value="5">5 nights</option>
+            <option value="7">7 nights</option>
+          </select>
+        </div>
+
+        <button class="reserve-btn" onclick="reserveStay()">
+          Reserve
+        </button>
+
+        <p class="booking-message" id="bookingMessage"></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+
+  <div class="footer-brand">
+    YaDar | يادار
+  </div>
+
+  <div class="footer-links">
+    <span>About</span>
+    <span>Contact</span>
+    <span>Privacy</span>
+    <span>Terms</span>
+  </div>
+
+  <p>
+    YaDar is currently a discovery guide only.
+    No bookings or payments are completed through the website at this stage.
+  </p>
+
+</footer>
+<div class="toast" id="toastMessage">
+  ✅ Welcome to YaDar
+</div>
+<div class="login-modal" id="loginModal">
+
+  <div class="login-box">
+
+    <button class="close-login" onclick="closeLogin()">
+      ×
+    </button>
+
+    <h2>Welcome back</h2>
+
+    <p class="login-sub">
+      Login to continue to YaDar
+    </p>
+    <input type="email" placeholder="Email">
+
+    <input type="password" placeholder="Password">
+
+    <p class="login-error" id="loginError">
+  Please enter your email and password
+</p>
+    
+    <button class="login-submit" onclick="submitLogin()">
+  Login
+</button>
+
+  </div>
+
+</div>
+<div class="account-popup" id="accountPopup">
+
+  <div class="account-card">
+
+    <button class="close-account" onclick="closeAccountPopup()">
+      ×
+    </button>
+
+    <div class="profile-avatar">👤</div>
+
+   <h2>My Account</h2>
+
+<p class="account-status">
+  Verified YaDar member
+</p>
+    
+    <div class="account-stats">
+
+  <div>
+    <strong>12</strong>
+    <span>Favorites</span>
+  </div>
+
+  <div>
+    <strong>4</strong>
+    <span>Bookings</span>
+  </div>
+
+</div>
+
+    <p class="profile-email" id="profileEmail">
+      user@yadar.com
+    </p>
+
+    <button onclick="showFavoritesPopup()">
+      ❤️ My Favorites
+    </button>
+
+    <button onclick="showBookingsPopup()">
+      📅 My Bookings
+    </button>
+
+    <div id="bookingsList" class="bookings-list"></div>
+    
+    <button class="logout-btn" onclick="logoutUser()">
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+<div class="menu-popup" id="menuPopup">
+  <div class="menu-card">
+    <button onclick="scrollToSection('riyadhSection')">🏡 Homes</button>
+    <button onclick="scrollToSection('favoritesSection')">❤️ Favorites</button>
+    <button onclick="scrollToSection('abhaSection')">⛰️ Abha stays</button>
+    <button onclick="scrollToAbout()">ℹ️ About</button>
+  </div>
+</div>
+<div class="suggest-modal" id="suggestModal">
+
+  <div class="suggest-box">
+
+    <button class="close-suggest"
+      onclick="closeSuggestModal()">
+      ×
+    </button>
+
+    <h2>Suggest a stay</h2>
+
+    <p class="suggest-sub">
+      Submit a property suggestion for YaDar
+    </p>
+
+    <input type="text"
+      placeholder="Property name">
+
+    <input type="text"
+      placeholder="City">
+
+    <input type="text"
+      placeholder="Instagram or website link">
+
+    <textarea
+      placeholder="Short description"></textarea>
+
+    <button class="suggest-submit"
+      onclick="submitSuggestion()">
+      Send suggestion
+    </button>
+
+  </div>
+
+</div>
+  
